@@ -26,7 +26,7 @@
       --glow-green: 0 0 18px rgba(57,255,20,.55), 0 0 44px rgba(57,255,20,.25);
       --glow-purple: 0 0 22px rgba(176,38,255,.45), 0 0 60px rgba(176,38,255,.20);
 
-      /*  Footer logo (ajusta aquí) */
+      /* ✅ Footer logo (ajusta aquí) */
       --footerLogoH: 90px;      /* espacio reservado (evita que baje el texto) */
       --footerLogoImgH: 120px;  /* tamaño visible del logo */
     }
@@ -72,7 +72,7 @@
       z-index: 1000;
     }
 
-    /*  FIX: header con altura fija */
+    /* ✅ FIX: header con altura fija */
     nav{
       display:flex;
       justify-content: space-between;
@@ -81,7 +81,7 @@
       min-height: 64px;
     }
 
-    /*  FIX: logo NO agranda el recuadro del nav */
+    /* ✅ FIX: logo NO agranda el recuadro del nav */
     .logo{
       display:flex;
       align-items:center;
@@ -326,7 +326,7 @@
       gap: 46px;
     }
 
-    /*  NUEVO: invierte ABOUT en desktop */
+    /* ✅ NUEVO: invierte ABOUT en desktop */
     .about-content.reverse{
       flex-direction: row-reverse; /* deja la imagen a la izquierda y texto a la derecha */
     }
@@ -493,7 +493,7 @@
       margin-bottom: 34px;
     }
 
-    /*  NUEVO: logo footer grande sin empujar texto */
+    /* ✅ NUEVO: logo footer grande sin empujar texto */
     .footer-logo{
       height: var(--footerLogoH);
       display:flex;
@@ -550,13 +550,31 @@
         justify-content: center;
       }
       .hero-machine{ margin-top: 28px; }
+      /* 🔥 Logo Header Premium Mobile */
+nav{
+  min-height: 78px;
+}
+
+.logo{
+  max-height: 78px;
+}
+
+.logo img{
+  height: 70px;
+  transform: scale(1.45);
+  transform-origin: left center;
+
+  filter:
+    drop-shadow(0 0 18px rgba(57,255,20,.55))
+    drop-shadow(0 0 22px rgba(176,38,255,.45))
+    drop-shadow(0 0 35px rgba(57,255,20,.25));
+}
       .hero h1{ font-size: 2.6rem; }
 
       .about-content{ flex-direction: column; }
       .about-content.reverse{ flex-direction: column; }
       .about-image{ order: -1; width: 100%; }
 
-      .logo img{ height: 44px; transform: scale(1.10); }
 
       :root{
         --footerLogoH: 70px;
@@ -657,7 +675,7 @@
         <p>Conoce nuestro servicio moderno y eficiente de máquinas expendedoras</p>
       </div>
 
-      <!--  invertido (imagen izquierda / texto derecha) -->
+      <!-- ✅ invertido (imagen izquierda / texto derecha) -->
       <div class="about-content reverse">
         <div class="about-text">
           <h3>Servicio integral de vending</h3>
@@ -696,7 +714,7 @@
         <div class="ideal-card">
           <i class="fas fa-school"></i>
           <h3>Escuelas</h3>
-          <p>Opciones prácticas para estudiantes y personal educativo.</p>
+          <p>Productos saludables adaptados a lineamientos escolares.</p>
         </div>
         <div class="ideal-card">
           <i class="fas fa-dumbbell"></i>
@@ -730,32 +748,44 @@
       </div>
 
       <div class="benefits-grid">
-        <div class="benefit-card">
-          <h3><i class="fas fa-wrench"></i> Sin costo de instalación</h3>
-          <p>No requieres inversión inicial. Nosotros nos encargamos de todo el proceso de instalación sin costos para ti.</p>
-        </div>
-        <div class="benefit-card">
-          <h3><i class="fas fa-headset"></i> Servicio incluido</h3>
-          <p>Mantenimiento, reposición de productos y atención a incidencias están incluidos en nuestro servicio.</p>
-        </div>
-        <div class="benefit-card">
-          <h3><i class="fas fa-clock"></i> Disponibilidad 24/7</h3>
-          <p>Tu personal o clientes pueden acceder a snacks y bebidas en cualquier momento del día o noche.</p>
-        </div>
-        <div class="benefit-card">
-          <h3><i class="fas fa-battery-full"></i> Productos siempre frescos</h3>
-          <p>Garantizamos rotación constante de inventario para ofrecer productos frescos y de calidad.</p>
-        </div>
-        <div class="benefit-card">
-          <h3><i class="fas fa-chart-line"></i> Ingresos adicionales</h3>
-          <p>Si aplica a tu espacio, podemos compartir un esquema de participación por ventas (según afluencia y ubicación).</p>
-        </div>
-        <div class="benefit-card">
-          <h3><i class="fas fa-shield-alt"></i> Máquinas modernas y seguras</h3>
-          <p>Equipos con sistemas de seguridad y operación confiable para espacios de alto tráfico.</p>
-        </div>
-      </div>
-    </div>
+
+  <!-- 1️⃣ PRIMERO: Ingresos adicionales -->
+  <div class="benefit-card">
+    <h3><i class="fas fa-chart-line"></i> Ingresos adicionales</h3>
+    <p>Si aplica a tu espacio, podemos compartir un esquema de participación por ventas (según afluencia y ubicación).</p>
+  </div>
+
+  <!-- 2️⃣ Sin costo de instalación -->
+  <div class="benefit-card">
+    <h3><i class="fas fa-wrench"></i> Sin costo de instalación</h3>
+    <p>No requieres inversión inicial. Nosotros nos encargamos de todo el proceso de instalación sin costos para ti.</p>
+  </div>
+
+  <!-- 3️⃣ Servicio incluido -->
+  <div class="benefit-card">
+    <h3><i class="fas fa-headset"></i> Servicio incluido</h3>
+    <p>Mantenimiento, reposición de productos y atención a incidencias están incluidos en nuestro servicio.</p>
+  </div>
+
+  <!-- 4️⃣ Disponibilidad -->
+  <div class="benefit-card">
+    <h3><i class="fas fa-clock"></i> Disponibilidad 24/7</h3>
+    <p>Tu personal o clientes pueden acceder a snacks y bebidas en cualquier momento del día o noche.</p>
+  </div>
+
+  <!-- 5️⃣ Productos frescos -->
+  <div class="benefit-card">
+    <h3><i class="fas fa-battery-full"></i> Productos siempre frescos</h3>
+    <p>Garantizamos rotación constante de inventario para ofrecer productos frescos y de calidad.</p>
+  </div>
+
+  <!-- 6️⃣ Seguridad -->
+  <div class="benefit-card">
+    <h3><i class="fas fa-shield-alt"></i> Máquinas modernas y seguras</h3>
+    <p>Equipos con sistemas de seguridad y operación confiable para espacios de alto tráfico.</p>
+  </div>
+
+</div>
   </section>
 
   <section class="cta" id="contacto">
