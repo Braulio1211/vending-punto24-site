@@ -612,7 +612,12 @@ html{ scroll-behavior: smooth; }
   .hero p{ font-size: 1.08rem; }
   section{ padding: 70px 0; }
   .section-title h2{ font-size: 2.0rem; }
-
+/* 🔥 En móvil quitamos el blur que lava el fondo */
+.ideal-card,
+.benefit-card{
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
   /* ✅ Logo del centro (hero) MÁS grande en móvil */
   .hero-brand img{ height: 200px; }
 }
