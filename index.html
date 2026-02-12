@@ -527,7 +527,7 @@
       text-shadow: var(--glow-green);
     }
 
-        .copyright{
+      .copyright{
       text-align:center;
       padding-top: 22px;
       border-top: 1px solid rgba(255,255,255,.08);
@@ -543,26 +543,35 @@
 
     @media (max-width: 992px){
       .hero-grid{ grid-template-columns: 1fr; text-align:center; }
-
       .hero-content{
         text-align:center;
         margin: 0 auto;
         padding-top: 0;
       }
-
       .hero-brand{
         position: static;
         margin-bottom: 16px;
         justify-content: center;
       }
-
       .hero-machine{ margin-top: 28px; }
-
       .hero h1{ font-size: 2.6rem; }
 
       .about-content{ flex-direction: column; }
       .about-content.reverse{ flex-direction: column; }
       .about-image{ order: -1; width: 100%; }
+
+      /* ✅ Logo header más grande en móvil (SIN glow extra) */
+      nav{ min-height: 78px; }
+      .logo{ max-height: 78px; }
+      .logo img{
+        height: 70px;
+        transform: scale(1.35);
+        transform-origin: left center;
+
+        /* 👇 dejamos el glow original (no el extra “blanco”) */
+        filter: drop-shadow(0 0 12px rgba(57,255,20,.35))
+                drop-shadow(0 0 10px rgba(176,38,255,.25));
+      }
 
       :root{
         --footerLogoH: 70px;
@@ -593,18 +602,8 @@
       section{ padding: 70px 0; }
       .section-title h2{ font-size: 2.0rem; }
 
-      /* 🔥 Logo centro (hero) más grande + glow fuerte */
-      .hero-brand img{
-        height: 130px;
-        filter:
-          drop-shadow(0 0 22px rgba(57,255,20,.75))
-          drop-shadow(0 0 26px rgba(176,38,255,.60))
-          drop-shadow(0 0 52px rgba(57,255,20,.28));
-        -webkit-filter:
-          drop-shadow(0 0 22px rgba(57,255,20,.75))
-          drop-shadow(0 0 26px rgba(176,38,255,.60))
-          drop-shadow(0 0 52px rgba(57,255,20,.28));
-      }
+      /* ✅ Logo del centro (hero) un poco más grande en móvil */
+      .hero-brand img{ height: 88px; }
     }
 
     @media (max-width: 480px){
@@ -612,37 +611,20 @@
       .section-title h2{ font-size: 1.75rem; }
       .whatsapp-btn{ padding: 14px 26px; font-size: 1rem; }
 
-      /* 🔥 Header más alto para que el logo luzca */
-      nav{ min-height: 92px; }
-      .logo{ max-height: 92px; }
-
-      /* 🔥 Logo header premium + glow fuerte (Safari friendly) */
+      /* ✅ IMPORTANTE: esto antes lo hacía chiquito (40px). Ahora lo dejamos grande */
+      nav{ min-height: 78px; }
+      .logo{ max-height: 78px; }
       .logo img{
-        height: 92px;
-        transform: scale(1.6);
+        height: 70px;
+        transform: scale(1.35);
         transform-origin: left center;
-        filter:
-          drop-shadow(0 0 24px rgba(57,255,20,.85))
-          drop-shadow(0 0 28px rgba(176,38,255,.70))
-          drop-shadow(0 0 60px rgba(57,255,20,.30));
-        -webkit-filter:
-          drop-shadow(0 0 24px rgba(57,255,20,.85))
-          drop-shadow(0 0 28px rgba(176,38,255,.70))
-          drop-shadow(0 0 60px rgba(57,255,20,.30));
+
+        filter: drop-shadow(0 0 12px rgba(57,255,20,.35))
+                drop-shadow(0 0 10px rgba(176,38,255,.25));
       }
 
-      /* 🔥 Logo centro (hero) aún más grande */
-      .hero-brand img{
-        height: 150px;
-        filter:
-          drop-shadow(0 0 24px rgba(57,255,20,.85))
-          drop-shadow(0 0 28px rgba(176,38,255,.70))
-          drop-shadow(0 0 62px rgba(57,255,20,.30));
-        -webkit-filter:
-          drop-shadow(0 0 24px rgba(57,255,20,.85))
-          drop-shadow(0 0 28px rgba(176,38,255,.70))
-          drop-shadow(0 0 62px rgba(57,255,20,.30));
-      }
+      /* ✅ Logo del centro (hero) aún visible y “premium” */
+      .hero-brand img{ height: 84px; }
     }
   </style>
 </head>
@@ -705,7 +687,6 @@
         <p>Conoce nuestro servicio moderno y eficiente de máquinas expendedoras</p>
       </div>
 
-      <!-- ✅ invertido (imagen izquierda / texto derecha) -->
       <div class="about-content reverse">
         <div class="about-text">
           <h3>Servicio integral de vending</h3>
@@ -740,31 +721,26 @@
           <h3>Empresas y oficinas</h3>
           <p>Mejora la satisfacción de tus empleados con snacks y bebidas siempre disponibles.</p>
         </div>
-
         <div class="ideal-card">
           <i class="fas fa-school"></i>
           <h3>Escuelas</h3>
           <p>Productos saludables adaptados a lineamientos escolares.</p>
         </div>
-
         <div class="ideal-card">
           <i class="fas fa-dumbbell"></i>
           <h3>Gimnasios</h3>
           <p>Complementa la experiencia con bebidas energéticas y snacks proteicos.</p>
         </div>
-
         <div class="ideal-card">
           <i class="fas fa-clinic-medical"></i>
           <h3>Clínicas y hospitales</h3>
           <p>Opciones para personal médico y visitantes durante largas jornadas.</p>
         </div>
-
         <div class="ideal-card">
           <i class="fas fa-industry"></i>
           <h3>Plantas y centros de trabajo</h3>
           <p>Solución práctica para áreas de descanso en entornos industriales.</p>
         </div>
-
         <div class="ideal-card">
           <i class="fas fa-warehouse"></i>
           <h3>Otros espacios</h3>
@@ -782,6 +758,7 @@
       </div>
 
       <div class="benefits-grid">
+
         <div class="benefit-card">
           <h3><i class="fas fa-chart-line"></i> Ingresos adicionales</h3>
           <p>Si aplica a tu espacio, podemos compartir un esquema de participación por ventas (según afluencia y ubicación).</p>
@@ -811,6 +788,7 @@
           <h3><i class="fas fa-shield-alt"></i> Máquinas modernas y seguras</h3>
           <p>Equipos con sistemas de seguridad y operación confiable para espacios de alto tráfico.</p>
         </div>
+
       </div>
     </div>
   </section>
