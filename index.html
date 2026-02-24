@@ -95,7 +95,6 @@
       z-index: 1000;
     }
 
-    /* ✅ FIX: header con altura fija */
     nav{
       display:flex;
       justify-content: space-between;
@@ -104,13 +103,11 @@
       min-height: 64px;
     }
 
-    /* ✅ FIX: logo NO agranda el recuadro del nav */
     .logo{
       display:flex;
       align-items:center;
       gap:10px;
       text-decoration:none;
-
       max-height: 64px;
       overflow: visible;
       line-height: 0;
@@ -124,9 +121,27 @@
       object-fit: contain;
       filter: drop-shadow(0 0 12px rgba(57,255,20,.35))
               drop-shadow(0 0 10px rgba(176,38,255,.25));
-
       transform-origin: left center;
       transform: scale(1.25);
+    }
+
+    /* ✅ PROPUESTA: “logo luminoso” (opcional)
+       - No rompe layout
+       - Solo aplica si pones la clase .logo-glow al <img>
+    */
+    .logo-glow{
+      animation: logoPulse 3.2s ease-in-out infinite;
+      will-change: filter, transform;
+    }
+    @keyframes logoPulse{
+      0%,100%{
+        filter: drop-shadow(0 0 12px rgba(57,255,20,.35))
+                drop-shadow(0 0 10px rgba(176,38,255,.25));
+      }
+      50%{
+        filter: drop-shadow(0 0 18px rgba(57,255,20,.55))
+                drop-shadow(0 0 18px rgba(176,38,255,.40));
+      }
     }
 
     .nav-links{
@@ -349,9 +364,8 @@
       gap: 46px;
     }
 
-    /* ✅ NUEVO: invierte ABOUT en desktop */
     .about-content.reverse{
-      flex-direction: row-reverse; /* deja la imagen a la izquierda y texto a la derecha */
+      flex-direction: row-reverse;
     }
 
     .about-text{ flex: 1; }
@@ -516,7 +530,6 @@
       margin-bottom: 34px;
     }
 
-    /* ✅ NUEVO: logo footer grande sin empujar texto */
     .footer-logo{
       height: var(--footerLogoH);
       display:flex;
@@ -550,122 +563,127 @@
       text-shadow: var(--glow-green);
     }
 
-     .copyright{
-  text-align:center;
-  padding-top: 22px;
-  border-top: 1px solid rgba(255,255,255,.08);
-  color: rgba(255,255,255,.55);
-  font-size: .9rem;
-}
+    /* ✅ FIX: SOLO LINKS DE CONTACTO EN FOOTER (para que no desaparezca nada) */
+    .footer-column a{
+      color: inherit;
+      text-decoration: none;
+    }
+    .footer-column a:hover{
+      color: var(--text);
+      text-shadow: var(--glow-green);
+    }
 
-html{ scroll-behavior: smooth; }
+    .copyright{
+      text-align:center;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.55);
+      font-size: .9rem;
+    }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
+    html{ scroll-behavior: smooth; }
 
-@media (max-width: 992px){
-  .hero-grid{ grid-template-columns: 1fr; text-align:center; }
-  .hero-content{
-    text-align:center;
-    margin: 0 auto;
-    padding-top: 0;
-  }
-  .hero-brand{
-    position: static;
-    margin-bottom: 16px;
-    justify-content: center;
-  }
-  .hero-machine{ margin-top: 28px; }
-  .hero h1{ font-size: 2.6rem; }
+    /* =========================
+       RESPONSIVE
+       ========================= */
 
-  .about-content{ flex-direction: column; }
-  .about-content.reverse{ flex-direction: column; }
-  .about-image{ order: -1; width: 100%; }
+    @media (max-width: 992px){
+      .hero-grid{ grid-template-columns: 1fr; text-align:center; }
+      .hero-content{
+        text-align:center;
+        margin: 0 auto;
+        padding-top: 0;
+      }
+      .hero-brand{
+        position: static;
+        margin-bottom: 16px;
+        justify-content: center;
+      }
+      .hero-machine{ margin-top: 28px; }
+      .hero h1{ font-size: 2.6rem; }
 
-  /* ✅ Logo header más grande en móvil (SIN glow extra) */
-  nav{ min-height: 82px; }
-  .logo{ max-height: 82px; }
-  .logo img{
-    height: 82px;
-    transform: scale(1.45);
-    transform-origin: left center;
+      .about-content{ flex-direction: column; }
+      .about-content.reverse{ flex-direction: column; }
+      .about-image{ order: -1; width: 100%; }
 
-    /* glow original (no extra blanco) */
-    filter: drop-shadow(0 0 12px rgba(57,255,20,.35))
-            drop-shadow(0 0 10px rgba(176,38,255,.25));
-  }
+      nav{ min-height: 82px; }
+      .logo{ max-height: 82px; }
+      .logo img{
+        height: 82px;
+        transform: scale(1.45);
+        transform-origin: left center;
+        filter: drop-shadow(0 0 12px rgba(57,255,20,.35))
+                drop-shadow(0 0 10px rgba(176,38,255,.25));
+      }
 
-  :root{
-    --footerLogoH: 70px;
-    --footerLogoImgH: 90px;
-  }
-}
+      :root{
+        --footerLogoH: 70px;
+        --footerLogoImgH: 90px;
+      }
+    }
 
-@media (max-width: 768px){
-  .nav-links{
-    display:none;
-    position:absolute;
-    top: 100%;
-    left:0;
-    width:100%;
-    background: rgba(7,4,14,.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    flex-direction: column;
-    padding: 18px 20px;
-    border-bottom: 1px solid rgba(255,255,255,.08);
-  }
-  .nav-links.active{ display:flex; }
-  .nav-links li{ margin: 10px 0; }
-  .mobile-menu-btn{ display:block; }
-  /* ✅ FIX: en móvil el hero se “lava”, lo oscurecemos */
-.hero:before{
-  background:
-    radial-gradient(600px 240px at 20% 35%, rgba(176,38,255,.22), transparent 65%),
-    radial-gradient(620px 260px at 85% 30%, rgba(57,255,20,.18), transparent 65%),
-    linear-gradient(180deg, rgba(7,4,14,.75), rgba(7,4,14,.95));
-}
+    @media (max-width: 768px){
+      .nav-links{
+        display:none;
+        position:absolute;
+        top: 100%;
+        left:0;
+        width:100%;
+        background: rgba(7,4,14,.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        flex-direction: column;
+        padding: 18px 20px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+      }
+      .nav-links.active{ display:flex; }
+      .nav-links li{ margin: 10px 0; }
+      .mobile-menu-btn{ display:block; }
 
-.hero:after{
-  opacity: .35; /* menos brillo difuso */
-}
+      .hero:before{
+        background:
+          radial-gradient(600px 240px at 20% 35%, rgba(176,38,255,.22), transparent 65%),
+          radial-gradient(620px 260px at 85% 30%, rgba(57,255,20,.18), transparent 65%),
+          linear-gradient(180deg, rgba(7,4,14,.75), rgba(7,4,14,.95));
+      }
 
-  .hero h1{ font-size: 2.15rem; }
-  .hero p{ font-size: 1.08rem; }
-  section{ padding: 70px 0; }
-  .section-title h2{ font-size: 2.0rem; }
-/* 🔥 En móvil quitamos el blur que lava el fondo */
-.ideal-card,
-.benefit-card{
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-  /* ✅ Logo del centro (hero) MÁS grande en móvil */
-  .hero-brand img{ height: 200px; }
-}
+      .hero:after{
+        opacity: .35;
+      }
 
-@media (max-width: 480px){
-  .hero h1{ font-size: 1.95rem; }
-  .section-title h2{ font-size: 1.75rem; }
-  .whatsapp-btn{ padding: 14px 26px; font-size: 1rem; }
+      .hero h1{ font-size: 2.15rem; }
+      .hero p{ font-size: 1.08rem; }
+      section{ padding: 70px 0; }
+      .section-title h2{ font-size: 2.0rem; }
 
-  /* ✅ Mantener header logo grande (no lo achiques aquí) */
-  nav{ min-height: 78px; }
-  .logo{ max-height: 78px; }
-  .logo img{
-    height: 70px;
-    transform: scale(1.35);
-    transform-origin: left center;
+      .ideal-card,
+      .benefit-card{
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
 
-    filter: drop-shadow(0 0 12px rgba(57,255,20,.35))
-            drop-shadow(0 0 10px rgba(176,38,255,.25));
-  }
+      .hero-brand img{ height: 200px; }
+    }
 
-  /* ✅ Logo del centro (hero) grande en pantallas muy chicas */
-  .hero-brand img{ height: 185px; }
-}
-</style>
+    @media (max-width: 480px){
+      .hero h1{ font-size: 1.95rem; }
+      .section-title h2{ font-size: 1.75rem; }
+      .whatsapp-btn{ padding: 14px 26px; font-size: 1rem; }
+
+      nav{ min-height: 78px; }
+      .logo{ max-height: 78px; }
+      .logo img{
+        height: 70px;
+        transform: scale(1.35);
+        transform-origin: left center;
+        filter: drop-shadow(0 0 12px rgba(57,255,20,.35))
+                drop-shadow(0 0 10px rgba(176,38,255,.25));
+      }
+
+      /* ✅ Logo del centro (hero) grande en pantallas muy chicas */
+      .hero-brand img{ height: 185px; }
+    }
+  </style>
 </head>
 
 <body>
@@ -673,7 +691,8 @@ html{ scroll-behavior: smooth; }
   <div class="container">
     <nav>
       <a href="#inicio" class="logo" aria-label="Vending Punto 24">
-        <img src="https://raw.githubusercontent.com/Braulio1211/vending-punto24-assets/main/logo-vending-punto24-final.png" alt="Vending Punto 24">
+        <!-- ✅ aquí activé el “logo luminoso” con la clase logo-glow -->
+        <img class="logo-glow" src="https://raw.githubusercontent.com/Braulio1211/vending-punto24-assets/main/logo-vending-punto24-final.png" alt="Vending Punto 24">
       </a>
 
       <button class="mobile-menu-btn" id="menuBtn" aria-label="Menú">
@@ -841,7 +860,9 @@ html{ scroll-behavior: smooth; }
 
     <div style="margin-top:14px; color: var(--muted-2);">
       <i class="fas fa-envelope" style="color: var(--neon-purple); text-shadow: var(--glow-purple); margin-right:6px;"></i>
-      vendingpunto24@gmail.com
+      <a href="mailto:contacto@punto24.mx" style="color: inherit; text-decoration: none;">
+        contacto@punto24.mx
+      </a>
     </div>
   </div>
 </section>
@@ -870,9 +891,36 @@ html{ scroll-behavior: smooth; }
 
       <div class="footer-column">
         <h3>Contacto</h3>
-        <p><i class="fab fa-whatsapp" style="color: var(--neon-green); text-shadow: var(--glow-green);"></i> WhatsApp: 662 315 1986</p>
-        <p><i class="fas fa-phone" style="color: var(--neon-purple); text-shadow: var(--glow-purple);"></i> Teléfono: 662 315 1986</p>
-        <p><i class="fas fa-envelope" style="color: var(--neon-green); text-shadow: var(--glow-green);"></i> Email: vendingpunto24@gmail.com</p>
+
+        <p>
+          <i class="fab fa-whatsapp" style="color: var(--neon-green); text-shadow: var(--glow-green);"></i>
+          WhatsApp:
+          <a
+            class="whatsapp-footer"
+            href="https://wa.me/526623151986?text=Hola,%20me%20interesa%20información%20sobre%20Vending%20Punto%2024"
+            target="_blank"
+            rel="noopener"
+          >
+            662 315 1986
+          </a>
+        </p>
+
+        <p>
+          <i class="fas fa-phone" style="color: var(--neon-purple); text-shadow: var(--glow-purple);"></i>
+          Teléfono:
+          <a href="tel:+526623151986">
+            662 315 1986
+          </a>
+        </p>
+
+        <p>
+          <i class="fas fa-envelope" style="color: var(--neon-green); text-shadow: var(--glow-green);"></i>
+          Email:
+          <a href="mailto:contacto@punto24.mx">
+            contacto@punto24.mx
+          </a>
+        </p>
+
       </div>
     </div>
 
@@ -902,7 +950,9 @@ html{ scroll-behavior: smooth; }
 
   window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
-    header.style.boxShadow = (window.scrollY > 100) ? '0 10px 30px rgba(0,0,0,.45)' : 'none';
+    header.style.boxShadow = (window.scrollY > 100)
+      ? '0 10px 30px rgba(0,0,0,.45)'
+      : 'none';
   });
 </script>
 </body>
